@@ -1,13 +1,25 @@
 ---
 title: "07_gráficos-base"
 author: "Alejandro Palacio Siebe"
-format: html
+date: "2024-10-03"
+format: 
+  html:
+    toc: true
+theme: journal
+lang: es 
 ---
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
 
 ## Gráficos del sistema base de R
 
 ### Gráfico de dispersión
 ```{r}
+#| code-fold: true
+
 # generar gráfico de dispersión
 plot(
   x = trees$Girth, 
@@ -67,5 +79,37 @@ hist(
   sub = "Fuente: Harvard PRIM-H project data sets",
   cex.sub = 0.6
 )
+```
+
+```{r}
+#| label: gráfico-dispersión-penguins
+
+# Gráfico de dispersión de longitud del pico vs masa (peso)
+penguins |>
+  ggplot(aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point(size = 2) +
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Longitud del pico vs. masa") +
+  xlab("Longitud del pico (mm)") +
+  ylab("Masa (g)") +
+  labs(color = "Especie", shape = "Especie")
+```
+
+
+```{r}
+#| label: gráfico-dispersión-penguins-especie
+
+# Gráfico de dispersión de longitud del pico vs masa (peso) por especie
+penguins |>
+  ggplot(aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species,
+                 shape = species),
+             size = 2) +
+  geom_smooth(method = "lm", se = FALSE, aes(color = species)) +
+  scale_color_manual(values = c("darkorange", "darkorchid", "cyan4")) +
+  ggtitle("Longitud del pico vs. masa por especie") +
+  xlab("Longitud del pico (mm)") +
+  ylab("Masa (g)") +
+  labs(color = "Especie", shape = "Especie")
 ```
 
