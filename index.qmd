@@ -1,0 +1,71 @@
+---
+title: "07_gráficos-base"
+author: "Alejandro Palacio Siebe"
+format: html
+---
+
+## Gráficos del sistema base de R
+
+### Gráfico de dispersión
+```{r}
+# generar gráfico de dispersión
+plot(
+  x = trees$Girth, 
+  y = trees$Height,
+  xlab = "Diámetro del tronco (Pulgadas)",
+  ylab = "Altura del árbol (Pies)",
+  main = "a) Relación entre el diámetro del tronco y la altura de cerezos",
+  sub = "Fuente: Meyer, H. A. (1953) Forest Mensuration. 
+  Penns Valley Publishers, Inc.",
+  cex.sub = 0.6
+)
+```
+
+### Gráfico de barras
+```{r}
+# contar observaciones en una tabla nueva
+carros_por_cilindros <- table(mtcars$cyl)
+
+# generar gráfico de barras
+barplot(
+  height = carros_por_cilindros, 
+  xlab = "Número de cilindros",
+  ylab = "Cantidad de coches",
+  main = "Cantidad de coches según el número de cilindros",
+  sub = "Fuente: Henderson and Velleman (1981), Building multiple regression models interactively. Biometrics, 37, 391–411.",
+  cex.sub = 0.6
+)
+```
+
+### Gráfico de pastel
+```{r}
+# contar observaciones en tabla nueva
+estado_caso <- table(infert$case)
+
+# generar gráfico de pastel
+pie(
+  x = estado_caso,
+  main = "Proporción de participantes por estado de fertilidad", 
+  labels = paste(c("Caso (infértil)", "Control (fértil)"), ":", estado_caso),
+  sub = "Fuente: Trichopoulos, D., Handanos, N., Danezis, J., Kalandidi, A., 
+  & Kalapothaki, V. (1976). Induced abortion and secondary infertility.
+  British Journal of Obstetrics and Gynaecology, 83, 645–650. 
+  doi:10.1111/j.1471-0528.1976.tb00904.x.",
+  cex.sub = 0.6
+)
+```
+
+### Histograma
+```{r}
+# generar histograma
+hist(
+  x = quakes$mag,
+  breaks = 5, 
+  main = "Frecuencia de eventos sísmicos por magnitud", 
+  xlab = "Magnitud (MB)", 
+  ylab = "Frecuencia",
+  sub = "Fuente: Harvard PRIM-H project data sets",
+  cex.sub = 0.6
+)
+```
+
